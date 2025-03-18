@@ -9,21 +9,50 @@ namespace Banco
 {
     class ContaBancaria
     {
-        private int _numeroConta;
+        private string _tipoConta;
         private string _titular;
         private double _saldo;
-        public ContaBancaria(int numeroConta, string titular, double saldo)
+        private double _taxaDeSaque;
+        private double _bonusDeposito;
+        public int TipoOperacao()
         {
-            this._numeroConta = numeroConta;
+            Console.WriteLine("""
+                É uma conta corrente ou poupança?
+                1 - Conta poupança
+                2 - Conta corrente
+                """);
+            int resultado = int.Parse(Console.ReadLine());
+            return resultado;
+        }
+        public double BonusDeposito
+        {
+            get { return _bonusDeposito; }
+            set { _bonusDeposito = value; }
+        }
+        public double TaxaDeSaque
+        {
+            get { return _taxaDeSaque; }
+            set
+            {
+                _taxaDeSaque = value;
+            }
+        }
+        public ContaBancaria(string numeroConta, string titular, double saldo)
+        {
+            this._tipoConta = numeroConta;
             this._titular = titular;
             this._saldo = saldo;
         }
-        public int NumeroConta
+        public ContaBancaria()
         {
-            get { return _numeroConta; }
+
+        }
+        public string TipoConta
+        {
+            get { return _tipoConta; }
             set
             {
-                _numeroConta = value;
+                _tipoConta = value;
             }
         }
         public string Titular
@@ -38,14 +67,24 @@ namespace Banco
         }
         public void Depositar(double valor)
         {
-
-            if (valor >= 0)
+            if (valor < 0)
             {
-                Saldo += valor;
+                Console.WriteLine("Você não pode adicionar um número nulo");
             }
             else
             {
-                Console.WriteLine("Não tem como adicionar um valor negativo!");
+                if (TipoOperacao() == 1)
+                {
+                    Saldo += valor + (BonusDeposito * valor);
+                }
+                else if (TipoOperacao() == 2)
+                {
+                    Saldo += valor;
+                }
+                else
+                {
+                    Console.WriteLine("Opção não cadastrada!");
+                }
             }
         }
         public void Sacar(double valor)
@@ -56,12 +95,22 @@ namespace Banco
             }
             else
             {
-                Saldo -= valor;
+                if (TipoOperacao() == 1)
+                {
+                    Saldo -= valor;
+                    TipoConta = "Conta Poupança";
+                }
+                else if (TipoOperacao() == 2)
+                {
+                    Saldo -= (valor - TaxaDeSaque);
+                    TipoConta = "Conta Corrente";
+                }
             }
         }
         public void ExibirSaldo()
         {
-            Console.WriteLine($"CRIAR TIPO CONTA - Nome: {Titular} | Saldo {Saldo}");
+
+            Console.WriteLine($"{TipoConta} - Nome: {Titular} | Saldo: {Saldo}");
         }
 
 
