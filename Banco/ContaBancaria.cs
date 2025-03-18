@@ -14,15 +14,15 @@ namespace Banco
         private double _saldo;
         private double _taxaDeSaque;
         private double _bonusDeposito;
-        public int TipoOperacao()
+
+        public ContaBancaria(string titular, double saldo)
         {
-            Console.WriteLine("""
-                É uma conta corrente ou poupança?
-                1 - Conta poupança
-                2 - Conta corrente
-                """);
-            int resultado = int.Parse(Console.ReadLine());
-            return resultado;
+
+            this._titular = titular;
+            this._saldo = saldo;
+        }
+        public ContaBancaria()
+        {
         }
         public double BonusDeposito
         {
@@ -36,16 +36,6 @@ namespace Banco
             {
                 _taxaDeSaque = value;
             }
-        }
-        public ContaBancaria(string numeroConta, string titular, double saldo)
-        {
-            this._tipoConta = numeroConta;
-            this._titular = titular;
-            this._saldo = saldo;
-        }
-        public ContaBancaria()
-        {
-
         }
         public string TipoConta
         {
@@ -73,11 +63,11 @@ namespace Banco
             }
             else
             {
-                if (TipoOperacao() == 1)
+                if (this is ContaPoupanca)
                 {
                     Saldo += valor + (BonusDeposito * valor);
                 }
-                else if (TipoOperacao() == 2)
+                else if (this is ContaCorrente)
                 {
                     Saldo += valor;
                 }
@@ -95,22 +85,29 @@ namespace Banco
             }
             else
             {
-                if (TipoOperacao() == 1)
+                if (this is ContaPoupanca)
                 {
                     Saldo -= valor;
-                    TipoConta = "Conta Poupança";
                 }
-                else if (TipoOperacao() == 2)
+                else if (this is ContaCorrente)
                 {
-                    Saldo -= (valor - TaxaDeSaque);
-                    TipoConta = "Conta Corrente";
+                    Saldo -= (valor + TaxaDeSaque);
+                    if (valor + TaxaDeSaque > Saldo)
+                    {
+                        Console.WriteLine("Lamento, mas acrescentando a taxa a sua transição fica impossível de ser realizada");
+                    }
                 }
+
             }
         }
         public void ExibirSaldo()
         {
+            if (Saldo < 0)
+            {
+                Console.WriteLine("Operação cancelada!");
+            }
+            else { Console.WriteLine($"{TipoConta} - Nome: {Titular} | Saldo: {Saldo} reais"); }
 
-            Console.WriteLine($"{TipoConta} - Nome: {Titular} | Saldo: {Saldo}");
         }
 
 

@@ -8,12 +8,11 @@ namespace Banco
 {
     class ContaPoupanca : ContaBancaria
     {
-        public ContaPoupanca(string numeroConta, string titular, double saldo) : base(numeroConta, titular, saldo)
+        public ContaPoupanca(string titular, double saldo) : base(titular, saldo)
         {
-            BonusDeposito = 0.5;
+            TipoConta = "Conta Poupança";
+            BonusDeposito = 0.005;
             TaxaDeSaque = 0;
-
-
         }
     }
 }
