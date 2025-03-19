@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.ComponentModel.Design;
 namespace Banco
 {
     class Program
@@ -15,13 +16,17 @@ namespace Banco
                 pessoa.Saldo = double.Parse(Console.ReadLine());
                 TipoConta();
                 int tipoConta = int.Parse(Console.ReadLine());
-                if (tipoConta == 1)
+                switch (tipoConta)
                 {
-                    pessoa = new ContaPoupanca(pessoa.Titular, pessoa.Saldo);
-                }
-                else
-                {
-                    pessoa = new ContaCorrente(pessoa.Titular, pessoa.Saldo);
+                    case 1:
+                        pessoa = new ContaPoupanca(pessoa.Titular, pessoa.Saldo);
+                        break;
+                    case 2:
+                        pessoa = new ContaCorrente(pessoa.Titular, pessoa.Saldo);
+                        break;
+                    default:
+                        Console.WriteLine("Opção não válida");
+                        break;
                 }
                 Escolha();
                 int escolha = int.Parse(Console.ReadLine());
@@ -33,10 +38,6 @@ namespace Banco
             {
                 Console.WriteLine($"Você fez algo errado! {e.Message}");
             }
-
-
-
-
         }
         static void TipoConta()
         {
@@ -56,32 +57,35 @@ namespace Banco
         }
         static void Valor(int n1)
         {
-            if (n1 == 1)
+            switch (n1)
             {
-                Console.WriteLine("Digite a quantia que deseja sacar");
-            }
-            else if (n1 == 2)
-            {
-                Console.WriteLine("Digite a quantia que deseja depositar");
+                case 1:
+                    Console.WriteLine("Digite a quantia que deseja sacar");
+                    break;
+                case 2:
+                    Console.WriteLine("Digite a quantia que deseja depositar");
+                    break;
+                default:
+                    Console.WriteLine("Opção não válida!");
+                    break;
             }
         }
         static void Operacao(int escolhaOperacao, ContaBancaria pessoa, double Quantia)
         {
-            if (escolhaOperacao == 1)
+            switch (escolhaOperacao)
             {
+                case 1:
+                    pessoa.Sacar(Quantia);
+                    pessoa.ExibirSaldo();
+                    break;
+                case 2:
+                    pessoa.Depositar(Quantia);
+                    pessoa.ExibirSaldo();
+                    break;
+                default:
+                    Console.WriteLine("Opção não válida!");
+                    break;
 
-                pessoa.Sacar(Quantia);
-                pessoa.ExibirSaldo();
-            }
-            else if (escolhaOperacao == 2)
-            {
-
-                pessoa.Depositar(Quantia);
-                pessoa.ExibirSaldo();
-            }
-            else
-            {
-                Console.WriteLine("Opção não válida!");
             }
         }
     }

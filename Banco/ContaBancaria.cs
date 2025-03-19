@@ -59,7 +59,7 @@ namespace Banco
         {
             if (valor < 0)
             {
-                Console.WriteLine("Você não pode adicionar um número nulo");
+                Console.WriteLine("Você não pode adicionar um número negativo");
             }
             else
             {
@@ -94,7 +94,7 @@ namespace Banco
                     Saldo -= (valor + TaxaDeSaque);
                     if (valor + TaxaDeSaque > Saldo)
                     {
-                        Console.WriteLine("Lamento, mas acrescentando a taxa a sua transição fica impossível de ser realizada");
+                        Console.WriteLine("Lamento, mas acrescentando a taxa de 5 reais a sua transição fica impossível de ser realizada");
                     }
                 }
 
