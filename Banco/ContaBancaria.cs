@@ -14,16 +14,24 @@ namespace Banco
         private double _saldo;
         private double _taxaDeSaque;
         private double _bonusDeposito;
+        private int _numeroConta;
 
-        public ContaBancaria(string titular, double saldo, string tipoConta)
+        public ContaBancaria(string titular, double saldo, int tipoConta)
         {
-            this._tipoConta = tipoConta;
+            this._numeroConta = tipoConta;
             this._titular = titular;
             this._saldo = saldo;
         }
         public ContaBancaria()
         {
         }
+        public int NumeroConta
+        {
+            get { return _numeroConta; }
+            set { _numeroConta = value; }
+        }
+
+
         public double BonusDeposito
         {
             get { return _bonusDeposito; }
@@ -66,10 +74,12 @@ namespace Banco
                 if (this is ContaPoupanca)
                 {
                     Saldo += valor + (BonusDeposito * valor);
+                    Console.WriteLine("Operação realizada!");
                 }
                 else if (this is ContaCorrente)
                 {
                     Saldo += valor;
+                    Console.WriteLine("Operação realizada!");
                 }
                 else
                 {
@@ -88,13 +98,18 @@ namespace Banco
                 if (this is ContaPoupanca)
                 {
                     Saldo -= valor;
+                    Console.WriteLine("Operação realizada!");
                 }
                 else if (this is ContaCorrente)
                 {
-                    Saldo -= (valor + TaxaDeSaque);
                     if (valor + TaxaDeSaque > Saldo)
                     {
                         Console.WriteLine("Lamento, mas acrescentando a taxa de 5 reais a sua transição fica impossível de ser realizada");
+                    }
+                    else
+                    {
+                        Saldo -= (valor + TaxaDeSaque);
+                        Console.WriteLine("Operação realizada!");
                     }
                 }
             }
@@ -105,7 +120,7 @@ namespace Banco
             {
                 Console.WriteLine("Operação cancelada!");
             }
-            else { Console.WriteLine($"{TipoConta} - Nome: {Titular} | Saldo: {Saldo} reais"); }
+            else { Console.WriteLine($"Conta número: {NumeroConta} | {TipoConta} - Nome: {Titular} | Saldo: {Saldo} reais"); }
         }
     }
 }

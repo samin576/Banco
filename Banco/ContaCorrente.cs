@@ -9,9 +9,9 @@ namespace Banco
 {
     class ContaCorrente : ContaBancaria
     {
-        public ContaCorrente(string titular, double saldo, string tipoConta) : base(titular, saldo, tipoConta)
+        public ContaCorrente(string titular, double saldo, int tipoConta) : base(titular, saldo, tipoConta)
         {
-            TipoConta = "Conta Poupança";
+            TipoConta = "Conta tipo Corrente";
             BonusDeposito = 0;
             TaxaDeSaque = 5;
 

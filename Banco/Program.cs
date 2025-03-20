@@ -12,6 +12,8 @@ namespace Banco
                 ContaBancaria pessoa = new ContaBancaria();
                 Console.WriteLine("Digite o seu nome:");
                 pessoa.Titular = Console.ReadLine();
+                Console.WriteLine("Digite o número da sua conta:");
+                pessoa.NumeroConta = int.Parse(Console.ReadLine());
                 Console.WriteLine("Digite o seu saldo:");
                 pessoa.Saldo = double.Parse(Console.ReadLine());
                 TipoConta();
@@ -19,10 +21,10 @@ namespace Banco
                 switch (tipoConta)
                 {
                     case 1:
-                        pessoa = new ContaPoupanca(pessoa.Titular, pessoa.Saldo, pessoa.TipoConta);
+                        pessoa = new ContaPoupanca(pessoa.Titular, pessoa.Saldo, pessoa.NumeroConta);
                         break;
                     case 2:
-                        pessoa = new ContaCorrente(pessoa.Titular, pessoa.Saldo, pessoa.TipoConta);
+                        pessoa = new ContaCorrente(pessoa.Titular, pessoa.Saldo, pessoa.NumeroConta);
                         break;
                     default:
                         Console.WriteLine("Opção não válida");
