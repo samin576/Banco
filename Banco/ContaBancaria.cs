@@ -15,9 +15,9 @@ namespace Banco
         private double _taxaDeSaque;
         private double _bonusDeposito;
 
-        public ContaBancaria(string titular, double saldo)
+        public ContaBancaria(string titular, double saldo, string tipoConta)
         {
-
+            this._tipoConta = tipoConta;
             this._titular = titular;
             this._saldo = saldo;
         }
@@ -97,7 +97,6 @@ namespace Banco
                         Console.WriteLine("Lamento, mas acrescentando a taxa de 5 reais a sua transição fica impossível de ser realizada");
                     }
                 }
-
             }
         }
         public void ExibirSaldo()
@@ -107,9 +106,6 @@ namespace Banco
                 Console.WriteLine("Operação cancelada!");
             }
             else { Console.WriteLine($"{TipoConta} - Nome: {Titular} | Saldo: {Saldo} reais"); }
-
         }
-
-
     }
 }

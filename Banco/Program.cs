@@ -19,10 +19,10 @@ namespace Banco
                 switch (tipoConta)
                 {
                     case 1:
-                        pessoa = new ContaPoupanca(pessoa.Titular, pessoa.Saldo);
+                        pessoa = new ContaPoupanca(pessoa.Titular, pessoa.Saldo, pessoa.TipoConta);
                         break;
                     case 2:
-                        pessoa = new ContaCorrente(pessoa.Titular, pessoa.Saldo);
+                        pessoa = new ContaCorrente(pessoa.Titular, pessoa.Saldo, pessoa.TipoConta);
                         break;
                     default:
                         Console.WriteLine("Opção não válida");
