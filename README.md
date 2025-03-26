@@ -1,7 +1,7 @@
 # 🏦 PROJETO ENTRA 21 - Banco
 
 ## 📌 Descrição  
-Este projeto simula o funcionamento básico de um banco, permitindo a criação depósitos e saques. Foi desenvolvido como parte do curso **Entra 21** e marcou minha primeira experiência utilizando conceitos mais avançados de **Programação Orientada a Objetos (POO)**.
+Este projeto simula o funcionamento básico de um banco, permitindo depositar e sacar. Foi desenvolvido como parte do curso **Entra 21** e marcou minha primeira experiência utilizando conceitos mais avançados de **Programação Orientada a Objetos (POO)**.
 
 ## 🛠️ Tecnologias Utilizadas  
 - **Programação Orientada a Objetos (POO)**  
